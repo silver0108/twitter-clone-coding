@@ -20,7 +20,6 @@
   position: fixed;
   width: inherit;
   height: 100dvh;
-  background-color: orange;
   display: flex;
   flex-direction: column;
 }
@@ -79,7 +78,6 @@
 }
 
 .rigthSectionInner {
-  background-color: aqua;
   width: 990px;
   height: 100dvh;
   display: flex;
@@ -87,13 +85,11 @@
 }
 
 .main {
-  background-color: aliceblue;
   width: 600px;
   height: 120vh;
 }
 
 .rightSection {
-  background-color: blue;
   width: 350px;
   height: 100%;
 }
