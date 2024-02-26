@@ -4,6 +4,7 @@ import dayjs from "dayjs";
 import relativeTime from 'dayjs/plugin/relativeTime';
 import 'dayjs/locale/ko';
 import ActionButtons from "./ActionButtons";
+import Image from "next/image";
 
 dayjs.locale('ko');
 dayjs.extend(relativeTime);
@@ -25,7 +26,7 @@ export default function Post() {
       <div className={styles.postWrapper}>
         <div className={styles.postUserSection}>
           <Link href={`/${target.User.id}`} className={styles.postUserImage}>
-            <img src={target.User.image} alt={target.User.nickname}/>
+            <Image src={target.User.image} alt={target.User.nickname} width={40} height={40} />
             <div className={styles.postShade}></div>
           </Link>
         </div>

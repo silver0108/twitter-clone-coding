@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import styles from "./followRecommend.module.css";
 
 export default function FollowRecommend() {
@@ -15,7 +16,7 @@ export default function FollowRecommend() {
     <div className={styles.container}>
       <div className={styles.userLogoSection}>
         <div className={styles.userLogo}>
-          <img src={user.image} alt={user.id}/>
+          <Image src={user.image} alt={user.id} width={40} height={40}/>
         </div>
       </div>
       <div className={styles.userInfo}>
