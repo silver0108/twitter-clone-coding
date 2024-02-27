@@ -14,11 +14,16 @@
   padding-left: 16px;
   width: 566px;
   margin-bottom: 60px;
+  background-color: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  z-index: 1;
+  position: fixed;
 }
 
 .trend {
   border-top: 1px solid rgb(239, 243, 244);
   font-size: 20px;
   font-weight: bold;
+  margin-top: 60px;
   margin-bottom: 12px;
 }

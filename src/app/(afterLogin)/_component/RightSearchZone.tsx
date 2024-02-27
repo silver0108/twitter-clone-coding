@@ -12,11 +12,11 @@ export default function RightSearchZone() {
   const onChangeEveryWhere = () => {};
   const onChangeArround = () => {};
   
-  if(pathname === '/search') {
+  if(pathname === '/explore') {
     return null;
   }
 
-  if(pathname === '/explore') {
+  if(pathname === '/search') {
     return (
       <div>
         <h3 className={styles.filterTitle}>검색 필터</h3>
@@ -49,7 +49,7 @@ export default function RightSearchZone() {
   }
 
   return (
-    <div style={{ marginBottom: 60, width: 'inherit' }}>
+    <div className={styles.searchFormZone}>
       <SearchForm/>
     </div>
   )
