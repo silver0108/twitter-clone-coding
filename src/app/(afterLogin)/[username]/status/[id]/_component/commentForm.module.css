@@ -1,5 +1,4 @@
 .postForm {
-  margin-top: 101px;
   display: flex;
   padding: 16px 16px 8px;
   border-color: rgb(239, 243, 244);
@@ -68,7 +67,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-} 
+}
 
 .uploadButton:hover {
   background-color: rgb(29, 155, 240, 0.1);
@@ -83,7 +82,7 @@
 }
 
 .actionButton {
-  width: 94px;
+  width: 70px;
   height: 36px;
   border: none;
   color: rgb(255, 255, 255);

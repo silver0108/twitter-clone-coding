@@ -49,8 +49,11 @@ export default function RightSearchZone() {
   }
 
   return (
-    <div className={styles.searchFormZone}>
-      <SearchForm/>
+    <div className={styles.searchFormWrapper}>
+      <div className={styles.searchFormZone}>
+        <SearchForm />
+      </div>
     </div>
+    
   )
 }
