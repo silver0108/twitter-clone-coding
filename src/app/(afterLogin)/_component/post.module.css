@@ -133,6 +133,12 @@
   background-color: rgba(29, 155, 240, 0.1);
 }
 
+.commentButton.white svg,
+.count {
+  fill: white;
+  color: white;
+}
+
 .commentButton.commented svg,
 .commentButton:hover svg {
   fill: rgb(29, 155, 240)
@@ -143,12 +149,20 @@
   color: rgb(29, 155, 240);
 }
 
+
+
 .repostButton button {
   background-color: rgba(0, 186, 124, 0.01);
 }
 
 .repostButton:hover button {
   background-color: rgba(0, 186, 124, 0.1);
+}
+
+.repostButton.white svg,
+.count {
+  fill: white;
+  color: white;
 }
 
 .repostButton.reposted svg,
@@ -161,12 +175,19 @@
   color: rgb(11, 175, 123)
 }
 
+
 .heartButton button {
   background-color: rgba(249, 24, 128, 0.01)
 }
 
 .heartButton:hover button {
   background-color: rgba(249, 24, 128, 0.1)
+}
+
+.heartButton.white svg,
+.count {
+  fill: white;
+  color: white;
 }
 
 .heartButton.liked svg,

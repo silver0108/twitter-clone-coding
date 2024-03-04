@@ -3,9 +3,13 @@
 import styles from './post.module.css';
 import cx from 'classnames'; // CSS 클래스를 조건부로 설정할 때 매우 유용한 라이브러리
 
-export default function ActionButtons() {
+type Props = {
+  white?: boolean
+}
 
-  const commented = true;
+export default function ActionButtons({white} : Props) {
+
+  const commented = false;
   const reposted = true;
   const liked = false;
 
@@ -15,7 +19,7 @@ export default function ActionButtons() {
 
   return (
     <div className={styles.actionButtons}>
-      <div className={cx(styles.commentButton, {[styles.commented] : commented})}>
+      <div className={cx(styles.commentButton, {[styles.commented] : commented}, white && styles.white)}>
         <button onClick={onClickComment}>
           <svg width={24} viewBox="0 0 24 24" aria-hidden="true">
             <g>
@@ -24,10 +28,10 @@ export default function ActionButtons() {
             </g>
           </svg>
         </button>
-        <div className={styles.count}>{1 || ''}</div>
+        <div className={styles.count}>{0 || ''}</div>
       </div>
 
-      <div className={cx(styles.repostButton, reposted && styles.reposted)}>
+      <div className={cx(styles.repostButton, reposted && styles.reposted, white && styles.white)}>
         <button onClick={onClickRepost}>
           <svg width={24} viewBox="0 0 24 24" aria-hidden="true">
             <g>
@@ -39,7 +43,7 @@ export default function ActionButtons() {
         <div className={styles.count}>{1 || ''}</div>
       </div>
 
-      <div className={cx([styles.heartButton, liked && styles.liked])}>
+      <div className={cx([styles.heartButton, liked && styles.liked, white && styles.white])}>
         <button onClick={onClickHeart}>
           <svg width={24} viewBox="0 0 24 24" aria-hidden="true">
             <g>
