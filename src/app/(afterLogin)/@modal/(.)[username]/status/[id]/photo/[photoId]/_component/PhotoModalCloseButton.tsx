@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from 'next/navigation';
-import styles from '../PhotoModal.module.css';
+import styles from '../photoModal.module.css';
 
 export default function PhotoModalCloseButton() {
   const router = useRouter();
