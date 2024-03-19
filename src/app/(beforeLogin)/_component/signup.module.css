@@ -121,3 +121,8 @@
   left: 45%;
   top: 8px;
 }
+
+.error {
+  font-weight: bold;
+  color: red;
+}
