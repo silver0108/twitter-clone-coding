@@ -1,5 +1,6 @@
 import NextAuth from 'next-auth';
 import CredentialsProvider from "next-auth/providers/credentials"
+import { NextResponse } from 'next/server';
 
 export const {
   handlers: { GET, POST }, // API Route (실제 주소)
@@ -29,9 +30,15 @@ export const {
           return null
         }
 
+        // 로그인한 사람의 user 정보 (로그인 유무와 로그인한 사람을 알 수 있음)
         const user = await authResponse.json()
-        console.log(user)
-        return user // 로그인한 사람의 user 정보 (로그인 유무와 로그인한 사람을 알 수 있음)
+      
+        return {
+          email: user.id, // id는 전달이 안돼서 email로 대체
+          name: user.nickname,  // User안에 name으로 고정되어 있어 nickname으로 바꿔줌
+          image: user.image,
+          ...user,
+        }
       },
     }),
   ],

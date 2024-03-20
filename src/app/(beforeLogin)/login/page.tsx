@@ -1,12 +1,21 @@
 "use client"
 
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import Main from "../_component/Main";
+import { auth } from "@/auth";
+import { useSession } from "next-auth/react";
 
 export default function LoginPage() {
   const router = useRouter();
-  router.replace('/i/flow/login');
+  const { data: session } = useSession();
 
+  // 로그인 후, /으로 이동하면 로그인 화면이 아닌 /home으로 이동하도록
+  if(session?.user) {
+    router.replace('/home');
+    return null;
+  }
+
+  router.replace('/i/flow/login');
   return <Main/>
 }
 

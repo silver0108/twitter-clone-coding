@@ -29,6 +29,8 @@ const signup = async (prevState: any, formData: FormData) => {
     }
     console.log(await response.json())
     shouldRedirect = true;
+
+    // 회원가입과 동시에 로그인
     await signIn("credentials", {
       username: formData.get('id'),
       password: formData.get('password'),
