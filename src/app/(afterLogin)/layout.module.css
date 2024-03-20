@@ -116,14 +116,14 @@
 
 .rigthSectionInner {
   width: 600px;
-  height: 100dvh;
+  height: 100%;
   display: flex;
   justify-content: space-between;
 }
 
 .main {
   width: 600px;
-  height: 120vh;
+  height: 100%;
 }
 
 .rightSection {
