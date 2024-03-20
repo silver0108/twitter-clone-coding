@@ -56,7 +56,7 @@ export default function SignupModal() {
               </div>
               <div className={styles.inputDiv}> 
                 <label className={styles.inputLabel} htmlFor="password">비밀번호</label>
-                <input id="password" name="password" className={styles.input} type="text" placeholder=""
+                <input id="password" name="password" className={styles.input} type="password" placeholder=""
                   required 
                 />
               </div>

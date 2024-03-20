@@ -3,8 +3,9 @@
 import Image from "next/image";
 import zLogo from "../../../../public/zlogo.png";
 import styles from "@/app/(beforeLogin)/_component/signup.module.css";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import { ChangeEventHandler, FormEventHandler, useState } from "react";
+import { signIn } from "next-auth/react";
 
 export default function LoginModal() {
   const [id, setId] = useState('');
@@ -12,32 +13,61 @@ export default function LoginModal() {
   const [message, setMessage] = useState('');
 
   const router = useRouter();
-  const onClickClose = () => {
-    router.back();
-    // TODO: 뒤로가기가 /home이 아니면 /home으로 보내기
-  }
-
+  
+  const onClickClose = () => router.back(); // TODO: 뒤로가기가 /home이 아니면 /home으로 보내기
   const onChangeId: ChangeEventHandler<HTMLInputElement> = (e) => { setId(e.target.value) };
   const onChangePassword: ChangeEventHandler<HTMLInputElement> = (e) => { setPassword(e.target.value) };
 
-  const onSubmit: FormEventHandler = (e) => {
+  const onSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
-    fetch('http://localhost:9090/api/users', {
-      method: 'post',
-      body: JSON.stringify({
-        id,
+    setMessage('');
+    try {
+      await signIn("credentials", {
+        username: id,
         password,
-      }),
-      credentials: 'include',
-    }).then((response: Response) => {
-      console.log(response.status);
-      if (response.status === 200) {
-        router.replace('/home');
-      }
-    }).catch((err) => {
+        redirect: false,
+      })
+      console.log('로그인되어야지')
+      router.replace('/home');
+    } catch (err) {
       console.error(err);
-    });
-  }
+      console.log(err)
+      setMessage('아이디와 비밀번호가 일치하지 않습니다.');
+    }
+  };
+  // const onSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
+  //   e.preventDefault();
+  //   setMessage('');
+
+  //   try {
+  //     // 클라이언트 next auth
+  //     await signIn("credentials", {
+  //       username: id,
+  //       password: password,
+  //       redirect: false, // true로 설정하면 서버 쪽에서 redirect
+  //     })
+  //     router.replace('/home');
+  //   } catch(err) {
+  //     console.error(err);
+  //     setMessage('아이디와 비밀번호가 일치하지 않습니다.')
+  //   }
+    
+  //   // fetch('http://localhost:9090/api/users', {
+  //   //   method: 'post',
+  //   //   body: JSON.stringify({
+  //   //     id,
+  //   //     password,
+  //   //   }),
+  //   //   credentials: 'include',
+  //   // }).then((response: Response) => {
+  //   //   console.log(response.status);
+  //   //   if (response.status === 200) {
+  //   //     router.replace('/home');
+  //   //   }
+  //   // }).catch((err) => {
+  //   //   console.error(err);
+  //   // });
+  // }
 
   return (
     <div className={styles.modalBackground}>
@@ -68,7 +98,7 @@ export default function LoginModal() {
             </div>
             <div className={styles.inputDiv}>
               <label className={styles.inputLabel} htmlFor="password">비밀번호</label>
-              <input id="password" className={styles.input} type="text" placeholder=""
+              <input id="password" className={styles.input} type="password" placeholder=""
                 value={password}
                 onChange={onChangePassword}
               />
