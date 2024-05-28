@@ -1,16 +1,23 @@
-import { HydrationBoundary, QueryClient, dehydrate } from "@tanstack/react-query";
+import {
+  HydrationBoundary,
+  QueryClient,
+  dehydrate,
+} from "@tanstack/react-query";
 import PostForm from "./_component/PostForm";
 import Tab from "./_component/Tab";
 import TabProvider from "./_component/TabProvider";
 import styles from "./home.module.css";
 import { getPostRecommends } from "./_lib/getPostRecommends";
-import PostRecommends from "./_component/PostRecommends";
+import TabDecider from "./_component/TabDecider";
 
 export default async function Home() {
   // react-query ssr
   const queryClient = new QueryClient();
   // queryKey를 갖고 있을 때, queryFn 실행해서 데이터를 가져오기
-  await queryClient.prefetchQuery({queryKey: ['posts', 'recommends'], queryFn: getPostRecommends});
+  await queryClient.prefetchQuery({
+    queryKey: ["posts", "recommends"],
+    queryFn: getPostRecommends,
+  });
   const dehydratedState = dehydrate(queryClient);
 
   return (
@@ -20,9 +27,9 @@ export default async function Home() {
         <TabProvider>
           <Tab />
           <PostForm />
-          <PostRecommends />
+          <TabDecider />
         </TabProvider>
       </HydrationBoundary>
     </main>
-  )
+  );
 }
