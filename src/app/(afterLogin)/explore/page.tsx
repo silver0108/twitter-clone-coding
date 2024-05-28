@@ -1,25 +1,16 @@
-import SearchForm from '../_component/SearchForm';
-import Trend from '../_component/Trend';
-import styles from './explore.module.css';
+import SearchForm from "../_component/SearchForm";
+import TrendSection from "./_component/TrendSection";
+import styles from "./explore.module.css";
 
 export default function Explore() {
   return (
     <main className={styles.main}>
       <div className={styles.formZone}>
-        <SearchForm/>
+        <SearchForm />
       </div>
       <div className={styles.trend}>
-        <Trend/>
-        <Trend />
-        <Trend />
-        <Trend />
-        <Trend />
-        <Trend />
-        <Trend />
-        <Trend />
-        <Trend />
-        <Trend />
+        <TrendSection />
       </div>
     </main>
-  )
+  );
 }
