@@ -1,4 +1,4 @@
-import { http, HttpResponse } from "msw";
+import { http, HttpResponse, StrictResponse } from "msw";
 import { faker } from "@faker-js/faker";
 
 // 지난 주 부터 오늘까지 랜덤으로 날짜 하나 골라주는 함수
@@ -280,9 +280,18 @@ export const handlers = [
     ]);
   }),
   // 유저 정보
-  http.get("/api/users/:userId", async ({ request, params }) => {
+  http.get("/api/users/:userId", ({ request, params }): StrictResponse<any> => {
     const { userId } = params;
-    return HttpResponse.json(User[1]);
+    const found = User.find((v) => v.id === userId);
+    if (found) {
+      return HttpResponse.json(found);
+    }
+    return HttpResponse.json(
+      { message: "no_such_user" },
+      {
+        status: 404,
+      }
+    );
   }),
   // 게시글 하나
   http.get("/api/users/:userId/posts/:postId", async ({ request, params }) => {

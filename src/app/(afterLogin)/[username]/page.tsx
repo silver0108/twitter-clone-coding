@@ -1,39 +1,41 @@
-import Image from 'next/image';
-import styles from './profile.module.css';
-import Post from '@/app/(afterLogin)/_component/Post';
-import BackButton from '../_component/BackButton';
+import styles from "./profile.module.css";
+import {
+  HydrationBoundary,
+  QueryClient,
+  dehydrate,
+} from "@tanstack/react-query";
+import { getUser } from "./_lib/getUser";
+import { getUserPosts } from "./_lib/getUserPosts";
+import UserPosts from "./_component/UserPosts";
+import UserInfo from "./_component/UserInfo";
 
-export default function Profile() {
-  const user = {
-    id: 'silver',
-    nickname: '실버',
-    image: '/5Udwvqim.jpg'
+type Props = {
+  params: {
+    username: string;
   };
+};
+
+export default async function Profile({ params }: Props) {
+  const { username } = params;
+  // react-query ssr
+  const queryClient = new QueryClient();
+  // queryKey를 갖고 있을 때, queryFn 실행해서 데이터를 가져오기
+  await queryClient.prefetchQuery({
+    queryKey: ["users", username],
+    queryFn: getUser,
+  });
+  await queryClient.prefetchQuery({
+    queryKey: ["posts", "users", username],
+    queryFn: getUserPosts,
+  });
+  const dehydratedState = dehydrate(queryClient);
 
   return (
     <main className={styles.main}>
-      <div className={styles.header}>
-        <BackButton />
-        <h3 className={styles.headerTitle}>{user.nickname}</h3>
-      </div>
-      <div className={styles.userZone}>
-        <div className={styles.userImage}>
-          <Image className={styles.image} src={user.image} alt={user.id} width={134} height={134} />
-        </div>
-        <div className={styles.userName}>
-          <div>{user.nickname}</div>
-          <div>@{user.id}</div>
-        </div>
-        <button className={styles.followButton}>팔로우</button>
-      </div>
-      <div>
-        <Post />
-        <Post />
-        <Post />
-        <Post />
-        <Post />
-        <Post />
-      </div>
+      <HydrationBoundary state={dehydratedState}>
+        <UserInfo username={username} />
+        <UserPosts username={username} />
+      </HydrationBoundary>
     </main>
-  )
+  );
 }
