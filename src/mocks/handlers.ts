@@ -25,20 +25,11 @@ const delay = (ms: number) =>
 export const handlers = [
   http.post("/api/login", () => {
     console.log("로그인");
-    return HttpResponse.json(
-      {
-        // json으로 보낼 때
-        userId: 1,
-        nickname: "실버",
-        id: "silver",
-        image: "/5Udwvqim.jpg",
+    return HttpResponse.json(User[2], {
+      headers: {
+        "Set-Cookie": "connect.sid=msw-cookie;HttpOnly;Path=/",
       },
-      {
-        headers: {
-          "Set-Cookie": "connect.sid=msw-cookie;HttpOnly;Path=/",
-        },
-      }
-    );
+    });
   }),
   http.post("/api/logout", () => {
     console.log("로그아웃");

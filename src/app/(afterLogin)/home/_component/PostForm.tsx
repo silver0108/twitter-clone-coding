@@ -27,11 +27,9 @@ export default function PostForm() {
     <form className={styles.postForm} onSubmit={onSubmit}>
       <div className={styles.postUserSection}>
         <div className={styles.postUserImage}>
-          <Image
+          <img
             src={me?.user?.image as string}
             alt={me?.user?.email as string}
-            width={40}
-            height={40}
           />
         </div>
       </div>
