@@ -14,9 +14,11 @@ export default async function Home() {
   // react-query ssr
   const queryClient = new QueryClient();
   // queryKey를 갖고 있을 때, queryFn 실행해서 데이터를 가져오기
-  await queryClient.prefetchQuery({
+  // 무한 스크롤
+  await queryClient.prefetchInfiniteQuery({
     queryKey: ["posts", "recommends"],
     queryFn: getPostRecommends,
+    initialPageParam: 0, // cursor 값
   });
   const dehydratedState = dehydrate(queryClient);
 
